@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Components use the semantic names below (bg-surface,
+ * text-label-2, bg-tint-fill...) and never raw colors, so light and dark
+ * are decided here only.
+ *
+ * Do not use opacity modifiers on these tokens (bg-tint/12): without color-mix(),
+ * iOS below 16.2 renders them fully opaque. Add a *-soft token instead.
+ */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fill: var(--fill);
+  --color-fill-strong: var(--fill-strong);
+  --color-separator: var(--separator);
+
+  --color-label: var(--label);
+  --color-label-2: var(--label-2);
+  --color-label-3: var(--label-3);
+
+  --color-tint: var(--tint);
+  --color-tint-fill: var(--tint-fill);
+  --color-tint-fill-hover: var(--tint-fill-hover);
+  --color-on-tint: #ffffff;
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-tint-soft: var(--tint-soft);
+  --color-tint-soft-strong: var(--tint-soft-strong);
+  --color-tint-line: var(--tint-line);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning-soft: var(--warning-soft);
+}
+
+:root {
+  color-scheme: light;
+
+  --canvas: #f2f2f7;
+  --surface: #ffffff;
+  --surface-2: #e5e5ea;
+  --fill: rgba(120, 120, 128, 0.12);
+  --fill-strong: rgba(120, 120, 128, 0.2);
+  --separator: rgba(60, 60, 67, 0.18);
+
+  --label: #1d1d1f;
+  --label-2: #6e6e73;
+  --label-3: #767679;
+
+  --tint: #0066cc;
+  --tint-fill: #0071e3;
+  --tint-fill-hover: #0077ed;
+
+  --success: #248a3d;
+  --warning: #b25000;
+  --danger: #d70015;
+  --tint-soft: rgba(0, 102, 204, 0.12);
+  --tint-soft-strong: rgba(0, 102, 204, 0.2);
+  --tint-line: rgba(0, 102, 204, 0.3);
+  --danger-soft: rgba(215, 0, 21, 0.12);
+  --warning-soft: rgba(178, 80, 0, 0.12);
+
+  --material: rgba(249, 249, 251, 0.72);
+  --material-solid: #f9f9fb;
+  --scrollbar-thumb: rgba(60, 60, 67, 0.3);
+
+  /* Swing phases: higher-contrast variants, these render as small text. */
+  --phase-address: #0040dd;
+  --phase-takeaway: #0071a4;
+  --phase-top: #248a3d;
+  --phase-downswing: #b25000;
+  --phase-impact: #d70015;
+  --phase-follow: #8944ab;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --canvas: #000000;
+    --surface: #1c1c1e;
+    --surface-2: #2c2c2e;
+    --fill: rgba(120, 120, 128, 0.24);
+    --fill-strong: rgba(120, 120, 128, 0.36);
+    --separator: rgba(84, 84, 88, 0.6);
+
+    --label: #f5f5f7;
+    --label-2: #a1a1a6;
+    --label-3: #8e8e93;
+
+    --tint: #2997ff;
+    --tint-fill: #0071e3;
+    --tint-fill-hover: #0077ed;
+
+    --success: #30d158;
+    --warning: #ff9f0a;
+    --danger: #ff453a;
+    --tint-soft: rgba(41, 151, 255, 0.12);
+    --tint-soft-strong: rgba(41, 151, 255, 0.2);
+    --tint-line: rgba(41, 151, 255, 0.3);
+    --danger-soft: rgba(255, 69, 58, 0.12);
+    --warning-soft: rgba(255, 159, 10, 0.12);
+
+    --material: rgba(29, 29, 31, 0.72);
+    --material-solid: #1d1d1f;
+    --scrollbar-thumb: rgba(235, 235, 245, 0.3);
+
+    --phase-address: #409cff;
+    --phase-takeaway: #64d2ff;
+    --phase-top: #30d158;
+    --phase-downswing: #ff9f0a;
+    --phase-impact: #ff453a;
+    --phase-follow: #bf5af2;
+  }
+}
+
+/* Video and camera stay dark in every appearance so footage is judged on black. */
+.theme-dark {
+  color-scheme: dark;
+
+  --canvas: #000000;
+  --surface: #1c1c1e;
+  --surface-2: #2c2c2e;
+  --fill: rgba(120, 120, 128, 0.24);
+  --fill-strong: rgba(120, 120, 128, 0.36);
+  --separator: rgba(84, 84, 88, 0.6);
+
+  --label: #f5f5f7;
+  --label-2: #a1a1a6;
+  --label-3: #8e8e93;
+
+  --tint: #2997ff;
+
+  --success: #30d158;
+  --warning: #ff9f0a;
+  --danger: #ff453a;
+  --tint-soft: rgba(41, 151, 255, 0.12);
+  --tint-soft-strong: rgba(41, 151, 255, 0.2);
+  --tint-line: rgba(41, 151, 255, 0.3);
+  --danger-soft: rgba(255, 69, 58, 0.12);
+  --warning-soft: rgba(255, 159, 10, 0.12);
+}
+
+/*
+ * Type scale. Tracking belongs to the size: large text tightens, small text
+ * opens up. Sizes are in rem so they follow the user's text-size setting.
+ */
+@theme {
+  --text-caption: 0.6875rem;
+  --text-caption--line-height: 1rem;
+  --text-caption--letter-spacing: 0.01em;
+  --text-caption-2: 0.625rem;
+  --text-caption-2--line-height: 0.875rem;
+  --text-caption-2--letter-spacing: 0.02em;
+
+  --text-xs--letter-spacing: 0.005em;
+  --text-lg--letter-spacing: -0.01em;
+  --text-xl--letter-spacing: -0.015em;
+  --text-2xl--letter-spacing: -0.02em;
+  --text-2xl--line-height: 1.2;
+}
+
+@layer base {
+  body {
+    background-color: var(--canvas);
+    color: var(--label);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Segoe UI", "Microsoft JhengHei", Roboto, "Noto Sans TC", Helvetica, Arial, sans-serif;
+    font-optical-sizing: auto;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    overscroll-behavior-y: none;
+  }
+
+  /* One press response for every control. `scale` composes with motion's transforms. */
+  :where(button, a[href], label.cursor-pointer) {
+    touch-action: manipulation;
+    transition: scale 240ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 150ms ease,
+      color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  }
+
+  :where(button:not(:disabled), a[href], label.cursor-pointer:not(.cursor-not-allowed)):active {
+    scale: 0.96;
+    transition-duration: 60ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :where(button:not(:disabled), a[href], label.cursor-pointer:not(.cursor-not-allowed)):active {
+      scale: 1;
+      opacity: 0.6;
+    }
+  }
+}
+
+/* Translucent chrome that content scrolls beneath. */
+.material {
+  background-color: var(--material);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .material {
+    background-color: var(--material-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .material {
+    background-color: var(--material-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+/* Custom slider accent */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+}

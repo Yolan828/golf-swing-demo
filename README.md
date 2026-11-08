@@ -30,9 +30,7 @@
 | 問題 | 做法 | 位置 |
 |---|---|---|
 | 兩支節奏不同的揮桿很難對照 | 以已標記階段為關鍵點做分段線性對應，動態調整播放速率，並校正累積漂移 | [`useDualVideoSync.ts`](src/hooks/useDualVideoSync.ts) |
-| WebKit 有時無法把 Blob 寫入 IndexedDB | 偵測失敗後改存 ArrayBuffer；影片位元組放在獨立資料表，列表查詢不會把整支影片載入記憶體 | [`videoService.ts`](src/db/services/videoService.ts) |
-| 取消錄影時 MediaRecorder 仍會觸發 `stop` | 只有使用者明確按下停止才存檔，取消的影片不會留在裝置上 | [`CameraRecorder.tsx`](src/components/video/CameraRecorder.tsx) |
-| Windows 上 Next.js 靜態匯出的預抓路徑會 404 | 建置後攤平區段檔案 | [`flatten-export-segments.mjs`](scripts/flatten-export-segments.mjs) |
+| 在瀏覽器本機保存大型影片，且須相容 WebKit 的 Blob 寫入限制 | Blob 寫入失敗時自動改存 ArrayBuffer，並放在獨立資料表，列表查詢不會把影片內容讀進記憶體 | [`videoService.ts`](src/db/services/videoService.ts) |
 
 **技術棧**：Next.js (App Router, Static Export)、React、TypeScript、IndexedDB + Dexie.js、Tailwind CSS、Motion、Playwright
 

@@ -4,13 +4,27 @@
 
 > **English summary:** A mobile-first, local-first web app for comparing two golf swing videos side by side. Videos and phase markers stay in the browser's IndexedDB, with no account, cloud storage, or API server. Built with Next.js static export, TypeScript, and Dexie.
 
-<p>
-  <img src="docs/images/home.png" alt="首頁：儲存容量與近期影片" width="240">
-  <img src="docs/images/my-swings.png" alt="我的揮桿：匯入或拍攝影片" width="240">
-  <img src="docs/images/compare.png" alt="雙片比對：同步播放與 6 階段標記" width="240">
-</p>
+<table>
+  <tr>
+    <td align="center" valign="top" width="33%">
+      <img src="docs/images/home.png" alt="首頁畫面：比對與上傳入口、本機儲存容量、近期揮桿影片" width="240"><br>
+      <b>🏠 首頁</b><br>
+      <sub>一鍵開始比對，隨時掌握本機儲存容量與近期影片</sub>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <img src="docs/images/my-swings.png" alt="我的揮桿畫面：選擇球桿與拍攝角度，從相簿匯入或用鏡頭拍攝，下方列出已保存影片" width="240"><br>
+      <b>🎥 我的揮桿</b><br>
+      <sub>選好球桿與拍攝角度，從相簿匯入或直接錄影</sub>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <img src="docs/images/compare.png" alt="雙片比對畫面：左右影片並排，下方為 6 階段標記與播放、逐格、變速控制" width="240"><br>
+      <b>🆚 雙片比對</b><br>
+      <sub>左右同步播放、逐格檢視，點階段標記即可跳轉</sub>
+    </td>
+  </tr>
+</table>
 
-<sub>截圖中的影片是程式產生的火柴人動畫。</sub>
+<sub>畫面中的影片是程式產生的火柴人動畫，階段時間為依比例估算的示範值。</sub>
 
 ---
 
